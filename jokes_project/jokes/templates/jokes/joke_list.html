@@ -1,0 +1,19 @@
+{% extends "jokes/base.html" %}
+
+{% block title %}Jokes{% endblock %}
+
+{% block content %}
+    <h2>List of Jokes</h2>
+    {% if jokes %}
+        <ul class="joke-list">
+            {% for joke in jokes %}
+                <li>
+                    <a href="{% url 'joke_detail' joke.pk %}">{{ joke.question }}</a>
+                    <small>by {{ joke.user.username }} on {{ joke.created_at|date:"F j, Y" }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No jokes yet. Be the first to <a href="{% url 'joke_create' %}">create one</a>!</p>
+    {% endif %}
+{% endblock %}

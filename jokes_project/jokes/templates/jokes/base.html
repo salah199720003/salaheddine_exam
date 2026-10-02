@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Jokes{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'joke_list' %}">List Jokes</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'joke_create' %}">Create Joke</a></li>
+                    <li class="nav-user">Signed in as <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'logout' %}">Sign Out</a></li>
+                {% else %}
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    <li><a href="{% url 'login' %}">Sign In</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <h1>Jokes Project</h1>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

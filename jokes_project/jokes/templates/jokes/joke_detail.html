@@ -1,0 +1,20 @@
+{% extends "jokes/base.html" %}
+
+{% block title %}{{ joke.question }}{% endblock %}
+
+{% block content %}
+    <h2>{{ joke.question }}</h2>
+    <p>{{ joke.answer }}</p>
+    <p>
+        Created by <strong>{{ joke.user.username }}</strong>
+        on {{ joke.created_at|date:"F j, Y, H:i" }}
+    </p>
+    <p>Last updated: {{ joke.updated_at|date:"F j, Y, H:i" }}</p>
+    {% if user.is_authenticated and user == joke.user %}
+        <p>
+            <a href="{% url 'joke_update' joke.pk %}">Update</a> |
+            <a href="{% url 'joke_delete' joke.pk %}">Delete</a>
+        </p>
+    {% endif %}
+    <p><a href="{% url 'joke_list' %}">Back to jokes</a></p>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "jokes/base.html" %}
+
+{% block title %}Delete Joke{% endblock %}
+
+{% block content %}
+    <h2>Delete Joke</h2>
+    <p>Are you sure you want to delete this joke?</p>
+    <p><strong>{{ joke.question }}</strong></p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+    </form>
+    <p><a href="{% url 'joke_detail' joke.pk %}">Cancel</a></p>
+{% endblock %}
